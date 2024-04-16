@@ -39,20 +39,12 @@ ENV NODE_ENV=production
 RUN pnpm run build
 
 # serve
-FROM node:20-alpine AS serve
+FROM caddy:2-alpine AS serve
 
-RUN mkdir /app && chown -R node:node /app
-WORKDIR /app
+WORKDIR /usr/share/caddy
 
-USER node
-
-COPY --from=build --chown=node:node /app/dist ./dist
-
-ENV NODE_ENV=production
-
-ENV HOST=0.0.0.0
-ENV PORT=3000
+COPY --from=build /app/dist /usr/share/caddy
 
 EXPOSE 3000
 
-CMD [ "node", "./dist/server/entry.mjs" ]
+CMD ["caddy", "file-server", "--listen", ":3000"]

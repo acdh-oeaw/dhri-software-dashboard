@@ -1,5 +1,5 @@
 // import mdx from "@astrojs/mdx";
-import node from "@astrojs/node";
+// import node from "@astrojs/node";
 // import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 // import keystatic from "@keystatic/astro";
@@ -10,9 +10,9 @@ import { loadEnv } from "vite";
 const env = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
 export default defineConfig({
-	adapter: node({
-		mode: "standalone",
-	}),
+	// adapter: node({
+	// 	mode: "standalone",
+	// }),
 	base: env.PUBLIC_APP_BASE_PATH,
 	integrations: [
 		icon({
@@ -39,7 +39,7 @@ export default defineConfig({
 		// react(),
 		sitemap(),
 	],
-	output: "hybrid",
+	// output: "hybrid",
 	prefetch: {
 		defaultStrategy: "hover",
 		prefetchAll: true,
