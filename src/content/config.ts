@@ -11,6 +11,8 @@ const softwareCollection = defineCollection({
 		/** Project website. */
 		url: z.string().url().optional(),
 		/** Demo deployment. */
+		image: z.string().url().optional(),
+		/** Demo deployment. */
 		demo: z.string().url().optional(),
 	}),
 });

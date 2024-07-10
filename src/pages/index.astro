@@ -1,26 +1,30 @@
 ---
-import { getCollection } from "astro:content";
-
 import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
 import PageLayout from "@/layouts/page.astro";
-
-const allSoftware = await getCollection("software");
 ---
 
 <PageLayout title="Home">
-	<MainContent>
-		<ul>
-			{
-				allSoftware.map((software) => {
-					return (
-						<li>
-							<article>
-								<pre>{JSON.stringify(software, null, 2)}</pre>
-							</article>
-						</li>
-					);
-				})
-			}
-		</ul>
+	<MainContent
+		class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-3 border-t-[5px] border-t-blue-950 bg-slate-50"
+	>
+		<div class="grid gap-6">
+			<div class="mx-auto grid gap-y-6 bg-gradient-to-br from-slate-600 to-slate-800 py-10">
+				<h1 class="text-2xl font-medium text-white">Software Dashboard</h1>
+				<p class="font-light text-slate-200">
+					Over the years, the <a
+						class="underline decoration-dotted"
+						href="https://www.oeaw.ac.at/acdh/research-units/dh-researchinfrastructure"
+						>DH Research&Infrastructure</a
+					> team has developed hundreds of specialized applications. Some of these applications are now
+					established as so-called “core services”, being used in numerous projects.
+				</p>
+			</div>
+			<ul
+				class="m-auto grid max-w-screen-lg grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-8 p-0 px-16"
+			>
+				<PageCard />
+			</ul>
+		</div>
 	</MainContent>
 </PageLayout>
