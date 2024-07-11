@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
 	content: [
@@ -9,7 +10,16 @@ const config: Config = {
 	],
 	plugins: [],
 	theme: {
-		extend: {},
+		extend: {
+			borderWidth: {
+				"5": "5px",
+				"3": "3px",
+			},
+			colors: {
+				neutral: colors.slate,
+				brand: colors.blue,
+			},
+		},
 	},
 };
 

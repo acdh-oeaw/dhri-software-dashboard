@@ -35,7 +35,7 @@ const matomoId = env.PUBLIC_MATOMO_ID;
 <html lang={locale}>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="color-scheme" content="light dark" />
+		<meta name="color-scheme" content="light" />
 		<meta charset="utf-8" />
 
 		<title>{[title, metadata.title].join(" | ")}</title>
@@ -89,7 +89,7 @@ const matomoId = env.PUBLIC_MATOMO_ID;
 		}
 	</head>
 
-	<body class="bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+	<body class="bg-white text-neutral-700">
 		<slot />
 	</body>
 </html>
