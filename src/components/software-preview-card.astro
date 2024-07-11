@@ -14,23 +14,23 @@ const software = Astro.props.software.data;
 ---
 
 <article
-	class="grid gap-4 rounded-b-md rounded-t-sm border-2 border-t-3 border-[#0000001a] border-t-brand-950 bg-white shadow-sm"
+	class="grid gap-4 rounded-b-md rounded-t-sm border-2 border-t-3 border-t-brand-950 bg-white shadow-sm"
 >
-	<a class="aspect-video bg-gradient-to-bl from-brand-100 to-brand-900" href={software.url}> </a>
+	<a class="aspect-video bg-gradient-to-bl from-brand-200 to-brand-900" href={software.url}> </a>
 	<div class="grid gap-2 px-8 py-3">
 		<header>
-			<h3 class="text-xl font-medium text-neutral-950">
+			<h3 class="text-xl font-medium text-brand-950">
 				<a href={software.url} class="hover:underline">
 					{software.title}
 				</a>
 			</h3>
 		</header>
-		<p class="text-gray-600">{software.summary}</p>
+		<p class="text-xs text-neutral-700 sm:text-base">{software.summary}</p>
 		<footer class="grid justify-start justify-items-start gap-2 text-neutral-950">
 			{
 				software.url ? (
 					<a
-						class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-sm transition hover:bg-black hover:text-white"
+						class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 						href={software.url}
 					>
 						Website
@@ -38,7 +38,7 @@ const software = Astro.props.software.data;
 				) : null
 			}
 			<a
-				class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-sm transition hover:bg-black hover:text-white"
+				class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 				href={software.repo}
 			>
 				Git repository
@@ -46,13 +46,13 @@ const software = Astro.props.software.data;
 			{
 				software.demo ? (
 					<a
-						class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-sm transition hover:bg-black hover:text-white"
+						class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 						href={software.demo}
 					>
 						Demo
 					</a>
 				) : (
-					<span class="italic text-neutral-500">Demo not available</span>
+					<span class="text-xs italic text-neutral-500 sm:text-sm">Demo not available</span>
 				)
 			}
 		</footer>

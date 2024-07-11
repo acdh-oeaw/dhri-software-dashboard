@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
+/* import typography from "tailwindcss/typography"; */
 
 const config: Config = {
 	content: [
@@ -17,7 +18,7 @@ const config: Config = {
 			},
 			colors: {
 				neutral: colors.slate,
-				brand: colors.blue,
+				brand: colors.sky,
 			},
 		},
 	},

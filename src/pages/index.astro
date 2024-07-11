@@ -10,11 +10,13 @@ const allSoftware = await getCollection("software");
 
 <PageLayout title="Home">
 	<MainContent
-		class="mx-auto grid w-full max-w-7xl gap-y-6 border-t-5 border-t-brand-950 bg-neutral-50 pb-8"
+		class="mx-auto grid w-full max-w-7xl gap-y-2 border-t-5 border-t-brand-950 bg-neutral-100 pb-8 sm:gap-y-6"
 	>
-		<div class="mx-auto grid gap-y-6 bg-gradient-to-br from-neutral-600 to-neutral-800 px-16 py-10">
+		<div
+			class="relative mx-auto grid gap-y-6 bg-gradient-to-bl from-brand-200 to-brand-900 p-5 sm:px-16 sm:py-10"
+		>
 			<h1 class="text-2xl font-medium text-white">Software Dashboard</h1>
-			<p class="text-neutral-200">
+			<p class="text-sm text-neutral-200 sm:text-base">
 				Over the years, the <a
 					class="underline decoration-dotted transition hover:text-white"
 					href="https://www.oeaw.ac.at/acdh/research-units/dh-researchinfrastructure"
@@ -23,7 +25,9 @@ const allSoftware = await getCollection("software");
 				established as so-called "core services", being used in numerous projects.
 			</p>
 		</div>
-		<ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-8 p-0 px-16">
+		<ul
+			class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-8 p-0 px-5 py-3 sm:px-16 sm:py-10"
+		>
 			{
 				allSoftware.map((software) => {
 					return (

@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
@@ -9,6 +10,7 @@ import { loadEnv } from "vite";
 
 const env = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
+// https://astro.build/config
 export default defineConfig({
 	adapter: node({
 		mode: "standalone",
@@ -38,6 +40,7 @@ export default defineConfig({
 		mdx(),
 		react(),
 		sitemap(),
+		tailwind(),
 	],
 	output: "hybrid",
 	prefetch: {
