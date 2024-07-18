@@ -1,6 +1,6 @@
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
-/* import typography from "tailwindcss/typography"; */
 
 const config: Config = {
 	content: [
@@ -9,7 +9,7 @@ const config: Config = {
 		"./src/layouts/**/*.@(astro|css|ts|tsx)",
 		"./src/pages/**/*.@(astro|css|ts|tsx)",
 	],
-	plugins: [],
+	plugins: [typography],
 	theme: {
 		extend: {
 			borderWidth: {
