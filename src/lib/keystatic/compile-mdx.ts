@@ -1,5 +1,5 @@
 import { createMdxProcessors, run, type TableOfContents } from "@acdh-oeaw/mdx-lib";
-import * as runtime from "astro/jsx-runtime";
+import { Fragment, jsx, jsxs } from "astro/jsx-runtime";
 import type { MDXModule } from "mdx/types";
 
 import type { Locale } from "@/config/i18n.config";
@@ -22,9 +22,12 @@ export async function compileMdx<T extends Record<string, unknown>>(
 ): Promise<MdxContent<T>> {
 	const processor = await createMdxProcessor(locale);
 	const vfile = await processor.process({ path: baseUrl, value: content });
-	// @ts-expect-error JSX types are not compatible.
 	return run(vfile, {
-		...runtime,
+		Fragment,
+		// @ts-expect-error JSX types are not compatible.
+		jsx,
+		// @ts-expect-error JSX types are not compatible.
+		jsxs,
 		baseUrl,
 		useMDXComponents,
 	}) as Promise<MdxContent<T>>;
