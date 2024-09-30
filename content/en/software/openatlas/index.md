@@ -1,5 +1,6 @@
 ---
 title: OpenAtlas
+publicationDate: 2024-09-26
 repo: https://github.com/acdh-oeaw/openatlas
 summary:
   An open source database software developed especially to acquire, edit and manage research data

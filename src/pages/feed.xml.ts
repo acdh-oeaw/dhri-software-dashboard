@@ -18,13 +18,13 @@ export async function GET(context: APIContext) {
 	return rss({
 		title: metadata.title,
 		description: metadata.description,
-
 		site: context.site!,
 		/** @see https://docs.astro.build/en/guides/rss/#generating-items */
 		items: software.map((item) => {
 			return {
 				title: item.data.title,
 				description: item.data.summary,
+				pubDate: new Date(item.data.publicationDate),
 				link: String(
 					createUrl({
 						baseUrl: import.meta.env.SITE,

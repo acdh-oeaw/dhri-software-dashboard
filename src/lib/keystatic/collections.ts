@@ -19,6 +19,11 @@ export const createSoftware = createCollection("/software/", (paths, _locale) =>
 					validation: { isRequired: true },
 				},
 			}),
+			publicationDate: fields.date({
+				label: "Publication date",
+				validation: { isRequired: true },
+				defaultValue: { kind: "today" },
+			}),
 			repo: fields.text({
 				label: "Repo",
 				description: "Code repository",
