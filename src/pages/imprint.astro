@@ -1,16 +1,26 @@
 ---
-import PageLayout from "@/layouts/page.astro";
+import { defaultLocale } from "@/config/i18n.config";
+import { createImprintUrl } from "@/config/imprint.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { pageSection, pageTitle } from "@/styles/components";
+import { request } from "@acdh-oeaw/lib";
+import { createI18n } from "@/lib/i18n";
+import MainContent from "@/components/main-content.astro";
 
-const url = "https://imprint.acdh.oeaw.ac.at/22495";
-const response = await fetch(url);
-const data = await response.text();
+const { t } = await createI18n();
+
+const documentTitle = t("ImprintPage.meta.title");
+const title = t("ImprintPage.title");
+
+const imprintUrl = createImprintUrl(defaultLocale);
+const imprintHtml = await request(imprintUrl, { responseType: "text" });
 ---
 
-<PageLayout title="Imprint">
-	<div class="mx-auto w-full max-w-screen-xl px-16">
-		<div class="prose max-w-screen-md">
-			<h1>Imprint</h1>
-			<div set:html={data} />
-		</div>
-	</div>
+<PageLayout title={documentTitle}>
+	<MainContent>
+		<section class={pageSection}>
+			<h1 class={pageTitle}>{title}</h1>
+			<div class="prose prose-sm" set:html={imprintHtml} />
+		</section>
+	</MainContent>
 </PageLayout>

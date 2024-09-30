@@ -4,7 +4,7 @@
 # @see https://sharp.pixelplumbing.com/install#linux-memory-allocator
 
 # base
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 RUN corepack enable
 
@@ -14,7 +14,6 @@ WORKDIR /app
 USER node
 
 COPY --chown=node:node .npmrc package.json pnpm-lock.yaml ./
-RUN sed -i "s/use-node-version/# use-node-version/" .npmrc
 
 RUN pnpm fetch --prod
 RUN pnpm install --frozen-lockfile --ignore-scripts --offline --prod
@@ -25,11 +24,14 @@ FROM base as build
 RUN pnpm fetch --dev
 
 COPY --chown=node:node ./ ./
-RUN sed -i "s/use-node-version/# use-node-version/" .npmrc
+
+# astro assets cache
+COPY --chown=node:node ./node_modules/.astro ./node_modules/.astro
 
 ARG PUBLIC_APP_BASE_PATH
 ARG PUBLIC_APP_BASE_URL
 ARG PUBLIC_BOTS
+ARG PUBLIC_GOOGLE_SITE_VERIFICATION
 ARG PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
 ARG PUBLIC_KEYSTATIC_GITHUB_REPO_NAME
 ARG PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER
@@ -54,7 +56,7 @@ RUN --mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_ID,uid=1000 \
 		pnpm run build
 
 # serve
-FROM node:20-alpine AS serve
+FROM node:22-alpine AS serve
 
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
@@ -62,7 +64,7 @@ WORKDIR /app
 USER node
 
 COPY --from=base --chown=node:node /app/node_modules ./node_modules
-COPY --from=build --chown=node:node /app/dist ./dist
+COPY --from=build --chown=node:node /app/dist ./
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
@@ -70,4 +72,4 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD [ "node", "./dist/server/entry.mjs" ]
+CMD [ "node", "./server/entry.mjs" ]

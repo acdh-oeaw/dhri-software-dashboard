@@ -4,18 +4,20 @@ a collection of software products we are proud of.
 
 ## how to add content
 
-- create a new feature branch
-- create a new markdown file in [`src/content/software`](src/content/software) from the
-  [template](src/content/_software-template.md), and fill out all
-  [the fields](src/content/config.ts).
-- create a pull request
+sign in to the CMS at <https://software-dashboard.acdh-ch-dev.oeaw.ac.at/admin> and add a new entry
+to the "Software" collection.
+
+alternatively, when working locally, use <http://localhost:3000/admin>, and commit your changes via
+git.
 
 ## how to run
 
-prerequisites:
+- [node.js 22.x](https://nodejs.org/en/download)
+- [pnpm 9.x](https://pnpm.io/installation)
 
-- [Node.js v20](https://nodejs.org/en/download)
-- [pnpm](https://pnpm.io/installation)
+> [!TIP]
+>
+> you can use `pnpm` to install the required node.js version with `pnpm env use 22 --global`
 
 set required environment variables in `.env.local`:
 
@@ -32,7 +34,7 @@ install dependencies:
 pnpm install
 ```
 
-run a development server on [http://localhost:3000](http://localhost:3000):
+run a development server on <http://localhost:3000>:
 
 ```bash
 pnpm run dev

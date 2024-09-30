@@ -1,5 +1,6 @@
 {
 	"css.validate": false,
+	"debug.toolBarLocation": "docked",
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
@@ -11,7 +12,9 @@
 		"strings": true
 	},
 	"editor.rulers": [100],
+	"editor.snippetSuggestions": "bottom",
 	"editor.stickyScroll.enabled": true,
+	"emmet.showSuggestionsAsSnippets": true,
 	"eslint.enable": true,
 	"eslint.options": {
 		"ignorePath": ".gitignore"
@@ -30,9 +33,10 @@
 	"stylelint.enable": true,
 	"stylelint.snippet": ["astro", "css", "postcss", "tailwindcss"],
 	"stylelint.validate": ["astro", "css", "postcss", "tailwindcss"],
+	"tailwindCSS.classAttributes": ["class", "class:list"],
 	"tailwindCSS.experimental.classRegex": [
 		["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-		["variants\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+		["styles\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
 	"tailwindCSS.validate": true,
 	"terminal.integrated.enablePersistentSessions": false,

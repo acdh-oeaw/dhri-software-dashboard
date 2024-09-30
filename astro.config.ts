@@ -1,16 +1,13 @@
-import mdx from "@astrojs/mdx";
+// import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
-import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import { loadEnv } from "vite";
 
 const env = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
-// https://astro.build/config
 export default defineConfig({
 	adapter: node({
 		mode: "standalone",
@@ -22,26 +19,25 @@ export default defineConfig({
 			include: {
 				lucide: ["chevron-down", "menu", "message-circle", "search", "x"],
 			},
-			svgoOptions: {
-				multipass: true,
-				plugins: [
-					{
-						name: "preset-default",
-						params: {
-							overrides: {
-								removeViewBox: false,
-							},
-						},
-					},
-				],
-			},
 		}),
-		keystatic(),
-		mdx(),
-		react(),
+		// mdx(),
+		/**
+		 * @see https://docs.astro.build/en/guides/integrations-guide/solid-js/#combining-multiple-jsx-frameworks
+		 * @see https://github.com/Thinkmill/keystatic/discussions/951
+		 */
+		react({
+			include: ["**/content/**", "**/keystatic/**"],
+		}),
 		sitemap(),
-		tailwind(),
 	],
+	/** Use `@/lib/keystatic/compile-mdx.ts` instead of astro's built-in markdown processor. */
+	// // @ts-expect-error Astro types are incomplete.
+	// markdown: {
+	// 	...(await createMdxConfig()),
+	// 	gfm: false,
+	// 	smartypants: false,
+	// 	syntaxHighlight: false,
+	// },
 	output: "hybrid",
 	prefetch: {
 		defaultStrategy: "hover",
@@ -49,12 +45,16 @@ export default defineConfig({
 	},
 	redirects: {
 		"/admin": {
-			destination: "/keystatic",
+			destination: env.PUBLIC_APP_BASE_PATH
+				? `${env.PUBLIC_APP_BASE_PATH.replace(/\/$/, "")}/keystatic`
+				: "/keystatic",
 			status: 307,
 		},
 	},
 	scopedStyleStrategy: "where",
 	server: {
+		/** Required by keystatic. */
+		host: "127.0.0.1",
 		port: 3000,
 	},
 	site: env.PUBLIC_APP_BASE_URL,

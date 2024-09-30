@@ -64,10 +64,22 @@ jobs:
     permissions:
       contents: read
       packages: write
+    environment:
+      name: "${{ needs.env.outputs.environment }}"
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Ensure astro build artefacts folder exists
+        run: mkdir -p node_modules/.astro
+
+      - name: Cache astro build artefacts
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.astro/
+          key: ${{ runner.os }}-astro-20.x-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-astro-20.x
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -100,8 +112,10 @@ jobs:
           tags: "${{ steps.meta.outputs.tags }}"
           labels: "${{ steps.meta.outputs.labels }}"
           build-args: |
+            "PUBLIC_APP_BASE_PATH=${{ vars.PUBLIC_APP_BASE_PATH }}"
             "PUBLIC_APP_BASE_URL=${{ needs.vars.outputs.public_url }}"
             "PUBLIC_BOTS=${{ vars.PUBLIC_BOTS }}"
+            "PUBLIC_GOOGLE_SITE_VERIFICATION=${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}"
             "PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=${{ vars.PUBLIC_KEYSTATIC_GITHUB_APP_SLUG }}"
             "PUBLIC_KEYSTATIC_GITHUB_REPO_NAME=${{ vars.PUBLIC_KEYSTATIC_GITHUB_REPO_NAME }}"
             "PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER=${{ vars.PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER }}"

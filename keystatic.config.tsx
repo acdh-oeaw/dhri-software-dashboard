@@ -1,20 +1,23 @@
-import { collection, config, fields } from "@keystatic/core";
+/* @jsxImportSource react */
 
-import { Logo } from "@/components/logo";
+import { withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
+import { config } from "@keystatic/core";
+
 import { env } from "@/config/env.config";
+import { defaultLocale } from "@/config/i18n.config";
+import { createSoftware } from "@/lib/keystatic/collections";
+import { Logo } from "@/lib/keystatic/logo";
+import { createIndexPage, createMetadata } from "@/lib/keystatic/singletons";
 
 export default config({
-	ui: {
-		brand: {
-			name: "ACDH-CH",
-			// @ts-expect-error `ReactNode` is a valid return type.
-			mark: Logo,
-		},
+	collections: {
+		[withI18nPrefix("software", defaultLocale)]: createSoftware(defaultLocale),
+	},
+	singletons: {
+		[withI18nPrefix("index-page", defaultLocale)]: createIndexPage(defaultLocale),
+		[withI18nPrefix("metadata", defaultLocale)]: createMetadata(defaultLocale),
 	},
 	storage:
-		/**
-		 * @see https://keystatic.com/docs/github-mode
-		 */
 		env.PUBLIC_KEYSTATIC_MODE === "github" &&
 		env.PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER &&
 		env.PUBLIC_KEYSTATIC_GITHUB_REPO_NAME
@@ -29,49 +32,18 @@ export default config({
 			: {
 					kind: "local",
 				},
-	collections: {
-		software: collection({
-			label: "Software",
-			path: "./src/content/software/*",
-			slugField: "title",
-			format: { contentField: "content" },
-			entryLayout: "form",
-			columns: ["title"],
-			schema: {
-				title: fields.slug({
-					name: {
-						label: "Title",
-						description: "Project title",
-						validation: { isRequired: true },
-					},
-				}),
-				repo: fields.text({
-					label: "Repo",
-					description: "Code repository",
-					validation: { isRequired: true },
-				}),
-				summary: fields.text({
-					label: "Summary",
-					description: "Short description",
-					multiline: true,
-					validation: { isRequired: true },
-				}),
-				url: fields.url({
-					label: "URL",
-					description: "Project website",
-					validation: { isRequired: false },
-				}),
-				demo: fields.url({
-					label: "Demo",
-					description: "Demo website",
-					validation: { isRequired: false },
-				}),
-				content: fields.mdx({
-					extension: "md",
-					label: "Content",
-					description: "Project description",
-				}),
+
+	ui: {
+		brand: {
+			mark() {
+				return <Logo />;
 			},
-		}),
+			name: "ACDH-CH",
+		},
+		navigation: {
+			Data: [withI18nPrefix("software", defaultLocale)],
+			Pages: [withI18nPrefix("index-page", defaultLocale)],
+			Settings: [withI18nPrefix("metadata", defaultLocale)],
+		},
 	},
 });

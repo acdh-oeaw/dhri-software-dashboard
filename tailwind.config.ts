@@ -1,25 +1,35 @@
-import typography from "@tailwindcss/typography";
+import typographyPlugin from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 
 const config: Config = {
-	content: [
-		"./src/components/**/*.@(astro|css|ts|tsx)",
-		"./src/content/**/*.@(md|mdoc|mdx)",
-		"./src/layouts/**/*.@(astro|css|ts|tsx)",
-		"./src/pages/**/*.@(astro|css|ts|tsx)",
-	],
-	plugins: [typography],
+	content: ["./src/@(components|layouts|lib|pages|styles)/**/*.@(astro|css|ts|tsx)"],
+	plugins: [typographyPlugin],
 	theme: {
+		container: {
+			center: true,
+			padding: {
+				DEFAULT: "2rem",
+			},
+			screens: {
+				"2xl": "90rem",
+			},
+		},
+		screens: {
+			sm: "40rem",
+			md: "48rem",
+			lg: "64rem",
+			xl: "80rem",
+			"2xl": "96rem",
+		},
 		extend: {
 			borderWidth: {
-				"5": "5px",
 				"3": "3px",
 			},
 			colors: {
 				neutral: colors.slate,
-				brand: colors.sky,
 			},
+			typography: {},
 		},
 	},
 };

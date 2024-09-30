@@ -1,0 +1,35 @@
+{
+	"mdx": {
+		"footnote-back-label": "Back to reference {reference}",
+		"footnotes": "Footnotes"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Imprint"
+		},
+		"title": "Imprint"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Home"
+		}
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Page not found"
+		},
+		"title": "Page not found"
+	},
+	"WebsiteFooter": {
+		"contact": "Contact",
+		"links": {
+			"feed": "RSS Feed",
+			"imprint": "Imprint"
+		}
+	},
+	"WebsiteHeader": {
+		"links": {
+			"home": "Home"
+		}
+	}
+}
