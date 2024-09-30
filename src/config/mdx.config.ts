@@ -1,3 +1,4 @@
+import { type MdxProcessorOptions, typographyConfig, withFootnotes } from "@acdh-oeaw/mdx-lib";
 import withSyntaxHighlighter from "@shikijs/rehype";
 import type { ElementContent } from "hast";
 import withHeadingIds from "rehype-slug";
@@ -5,7 +6,6 @@ import withFrontmatter from "remark-frontmatter";
 import withGfm from "remark-gfm";
 import withMdxFrontmatter from "remark-mdx-frontmatter";
 import withTypographicQuotes from "remark-smartypants";
-import { type MdxProcessorOptions, typographyConfig, withFootnotes } from "@acdh-oeaw/mdx-lib";
 
 import type { Locale } from "@/config/i18n.config";
 import { config as syntaxHighlighterConfig } from "@/config/syntax-highlighter.config";

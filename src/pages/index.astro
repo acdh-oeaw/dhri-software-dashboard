@@ -23,13 +23,13 @@ const { hero } = indexPage.data;
 			<h1 class="text-3xl font-extrabold tracking-tight text-neutral-950 md:text-5xl lg:text-6xl">
 				{hero.title.toLowerCase()}.
 			</h1>
-			<p class="text-sm text-neutral-700 sm:text-base md:text-lg font-medium ml-6">{hero.lead}</p>
+			<p class="ml-6 text-sm font-medium text-neutral-700 sm:text-base md:text-lg">{hero.lead}</p>
 		</section>
 
-		<div class="bg-neutral-50 border-t border-neutral-200">
+		<div class="border-t border-neutral-200 bg-neutral-50">
 			<section class={pageSection}>
 				<ul
-					class="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-y-8 gap-x-6"
+					class="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-x-6 gap-y-8"
 					role="list"
 				>
 					{

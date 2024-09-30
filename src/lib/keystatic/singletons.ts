@@ -1,6 +1,6 @@
 /* @jsxImportSource react */
 
-import { createLabel, createSingleton, createAssetOptions } from "@acdh-oeaw/keystatic-lib";
+import { createAssetOptions, createLabel, createSingleton } from "@acdh-oeaw/keystatic-lib";
 import { fields, singleton } from "@keystatic/core";
 
 import * as validation from "@/lib/keystatic/validation";

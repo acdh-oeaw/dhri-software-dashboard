@@ -6,12 +6,23 @@ import reactConfig from "@acdh-oeaw/eslint-config-react";
 import tailwindcssConfig from "@acdh-oeaw/eslint-config-tailwindcss";
 import gitignore from "eslint-config-flat-gitignore";
 
+const reactFiles = [
+	"keystatic.config.@(ts|tsx)",
+	"**/content/**/*.@(ts|tsx)",
+	"**/keystatic/**/*.@(ts|tsx)",
+];
+
 /** @type {Config} */
 const config = [
 	gitignore({ strict: false }),
 	...baseConfig,
 	...astroConfig,
-	...reactConfig,
+	...reactConfig.map((config) => {
+		return {
+			...config,
+			files: reactFiles,
+		};
+	}),
 	...tailwindcssConfig,
 	{
 		rules: {
@@ -20,7 +31,12 @@ const config = [
 			// "@typescript-eslint/explicit-module-boundary-types": "error",
 			// "@typescript-eslint/require-array-sort-compare": "error",
 			// "@typescript-eslint/strict-boolean-expressions": "error",
-			// "react/jsx-sort-props": ["error", { reservedFirst: true }],
+		},
+	},
+	{
+		files: reactFiles,
+		rules: {
+			"react/jsx-sort-props": ["error", { reservedFirst: true }],
 		},
 	},
 ];

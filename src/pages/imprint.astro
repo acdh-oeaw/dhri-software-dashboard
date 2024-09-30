@@ -1,11 +1,12 @@
 ---
+import { request } from "@acdh-oeaw/lib";
+
+import MainContent from "@/components/main-content.astro";
 import { defaultLocale } from "@/config/i18n.config";
 import { createImprintUrl } from "@/config/imprint.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { pageSection, pageTitle } from "@/styles/components";
-import { request } from "@acdh-oeaw/lib";
 import { createI18n } from "@/lib/i18n";
-import MainContent from "@/components/main-content.astro";
+import { pageSection, pageTitle } from "@/styles/components";
 
 const { t } = await createI18n();
 
