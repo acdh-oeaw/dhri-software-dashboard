@@ -1,11 +1,15 @@
 ---
 interface Props {
 	class?: string;
+	search?: "exclude";
 }
 
-const { class: className } = Astro.props;
+const { class: className, search } = Astro.props;
 ---
 
-<main class={className} id="main-content" tabindex={-1}>
+<main
+	class:list={["isolate", className]}
+	data-pagefind-body={search === "exclude" ? undefined : ""}
+>
 	<slot />
 </main>

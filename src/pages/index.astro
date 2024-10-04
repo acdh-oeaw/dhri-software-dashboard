@@ -1,42 +1,57 @@
 ---
+import { Image } from "astro:assets";
+
 import MainContent from "@/components/main-content.astro";
 import SoftwarePreviewCard from "@/components/software-preview-card.astro";
 import { defaultLocale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
+import { getImageImport } from "@/lib/get-image-import";
 import { createI18n } from "@/lib/i18n";
 import { createCollectionResource, createSingletonResource } from "@/lib/keystatic/resources";
 import { pageSection } from "@/styles/components";
 
-const { t } = await createI18n();
+const locale = defaultLocale;
+const { t } = await createI18n(locale);
+
+const page = await createSingletonResource("index-page", locale).read();
+const software = await createCollectionResource("software", locale).all();
 
 const documentTitle = t("IndexPage.meta.title");
-
-const indexPage = await createSingletonResource("index-page", defaultLocale).read();
-const software = await createCollectionResource("software", defaultLocale).all();
-
-const { hero } = indexPage.data;
+const { hero } = page.data;
 ---
 
-<PageLayout title={documentTitle}>
-	<MainContent>
-		<section class="container grid gap-y-2 py-8 sm:py-24">
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent class="flex flex-col">
+		<section class="container relative grid gap-y-2 py-8 sm:py-24">
+			{
+				hero.image ? (
+					<Image
+						alt=""
+						class="absolute inset-0 size-full object-cover"
+						decoding="auto"
+						fetchpriority="high"
+						loading="eager"
+						src={getImageImport(hero.image)}
+					/>
+				) : null
+			}
 			<h1 class="text-3xl font-extrabold tracking-tight text-neutral-950 md:text-5xl lg:text-6xl">
 				{hero.title.toLowerCase()}.
 			</h1>
 			<p class="ml-6 text-sm font-medium text-neutral-700 sm:text-base md:text-lg">{hero.lead}</p>
 		</section>
 
-		<div class="border-t border-neutral-200 bg-neutral-50">
+		<div class="grow border-t border-neutral-200 bg-neutral-50">
 			<section class={pageSection}>
 				<ul
 					class="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-x-6 gap-y-8"
 					role="list"
 				>
 					{
-						software.map((item) => {
+						software.map((software) => {
 							return (
 								<li>
-									<SoftwarePreviewCard {...item.data} />
+									<SoftwarePreviewCard {...software.data} />
 								</li>
 							);
 						})

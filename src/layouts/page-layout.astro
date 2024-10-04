@@ -1,5 +1,4 @@
 ---
-// import SkipLink from "@/components/skip-link.astro";
 import TailwindIndicator from "@/components/tailwind-indicator.astro";
 import WebsiteFooter from "@/components/website-footer.astro";
 import WebsiteHeader from "@/components/website-header.astro";
@@ -17,8 +16,6 @@ const { description, locale, robots, title } = Astro.props;
 ---
 
 <DocumentLayout description={description} locale={locale} robots={robots} title={title}>
-	{/** <SkipLink /> */}
-
 	<div class="grid min-h-full grid-rows-[auto_1fr_auto]">
 		<WebsiteHeader />
 		<slot />

@@ -2,7 +2,9 @@
 
 import baseConfig from "@acdh-oeaw/eslint-config";
 import astroConfig from "@acdh-oeaw/eslint-config-astro";
+import playwrightConfig from "@acdh-oeaw/eslint-config-playwright";
 import reactConfig from "@acdh-oeaw/eslint-config-react";
+import solidJsConfig from "@acdh-oeaw/eslint-config-solid";
 import tailwindcssConfig from "@acdh-oeaw/eslint-config-tailwindcss";
 import gitignore from "eslint-config-flat-gitignore";
 
@@ -23,7 +25,15 @@ const config = [
 			files: reactFiles,
 		};
 	}),
+	...solidJsConfig.map((config) => {
+		return {
+			...config,
+			files: ["**/components/**/*.@(ts|tsx)", "**/ui/**/*.@(ts|tsx)"],
+			ignores: reactFiles,
+		};
+	}),
 	...tailwindcssConfig,
+	...playwrightConfig,
 	{
 		rules: {
 			"arrow-body-style": ["error", "always"],

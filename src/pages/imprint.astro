@@ -8,20 +8,21 @@ import PageLayout from "@/layouts/page-layout.astro";
 import { createI18n } from "@/lib/i18n";
 import { pageSection, pageTitle } from "@/styles/components";
 
-const { t } = await createI18n();
+const locale = defaultLocale;
+const { t } = await createI18n(locale);
 
 const documentTitle = t("ImprintPage.meta.title");
 const title = t("ImprintPage.title");
 
-const imprintUrl = createImprintUrl(defaultLocale);
+const imprintUrl = createImprintUrl(locale);
 const imprintHtml = await request(imprintUrl, { responseType: "text" });
 ---
 
-<PageLayout title={documentTitle}>
-	<MainContent>
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent search="exclude">
 		<section class={pageSection}>
 			<h1 class={pageTitle}>{title}</h1>
-			<div class="prose prose-sm" set:html={imprintHtml} />
+			<div class="prose" set:html={imprintHtml} />
 		</section>
 	</MainContent>
 </PageLayout>

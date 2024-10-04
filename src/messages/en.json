@@ -1,4 +1,11 @@
 {
+	"collections": {
+		"software": {
+			"demo": "Demo",
+			"repo": "Git repository",
+			"url": "Website"
+		}
+	},
 	"mdx": {
 		"footnote-back-label": "Back to reference {reference}",
 		"footnotes": "Footnotes"
@@ -21,7 +28,6 @@
 		"title": "Page not found"
 	},
 	"WebsiteFooter": {
-		"contact": "Contact",
 		"links": {
 			"feed": "RSS Feed",
 			"imprint": "Imprint"

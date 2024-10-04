@@ -1,7 +1,0 @@
----
-title: acdh-django-zotero
-publicationDate: 2024-09-26
-repo: https://github.com/acdh-oeaw/acdh-django-zotero
-summary: A Django package to store/process Zotero items.
-url: https://pypi.org/project/acdh-django-zotero/
----

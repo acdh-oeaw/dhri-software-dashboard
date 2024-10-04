@@ -32,18 +32,17 @@ export default config({
 			: {
 					kind: "local",
 				},
-
 	ui: {
 		brand: {
 			mark() {
 				return <Logo />;
 			},
-			name: "ACDH-CH",
+			name: "Website",
 		},
 		navigation: {
-			Data: [withI18nPrefix("software", defaultLocale)],
-			Pages: [withI18nPrefix("index-page", defaultLocale)],
-			Settings: [withI18nPrefix("metadata", defaultLocale)],
+			HomePage: [withI18nPrefix("index-page", defaultLocale)],
+			Software: [withI18nPrefix("software", defaultLocale)],
+			Metadata: [withI18nPrefix("metadata", defaultLocale)],
 		},
 	},
 });

@@ -1,7 +1,8 @@
-// import mdx from "@astrojs/mdx";
+import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import { loadEnv } from "vite";
@@ -17,10 +18,11 @@ export default defineConfig({
 		icon({
 			/** @see https://www.astroicon.dev/reference/configuration/#include */
 			include: {
-				lucide: ["chevron-down", "menu", "message-circle", "search", "x"],
+				lucide: ["chevron-down", "menu", "search", "x"],
 			},
 		}),
-		// mdx(),
+		/** Only needed to make the astro jsx runtime work correctly. */
+		mdx(),
 		/**
 		 * @see https://docs.astro.build/en/guides/integrations-guide/solid-js/#combining-multiple-jsx-frameworks
 		 * @see https://github.com/Thinkmill/keystatic/discussions/951
@@ -29,15 +31,10 @@ export default defineConfig({
 			include: ["**/content/**", "**/keystatic/**"],
 		}),
 		sitemap(),
+		solidJs({
+			exclude: ["**/content/**", "**/keystatic/**"],
+		}),
 	],
-	/** Use `@/lib/keystatic/compile-mdx.ts` instead of astro's built-in markdown processor. */
-	// // @ts-expect-error Astro types are incomplete.
-	// markdown: {
-	// 	...(await createMdxConfig()),
-	// 	gfm: false,
-	// 	smartypants: false,
-	// 	syntaxHighlight: false,
-	// },
 	output: "hybrid",
 	prefetch: {
 		defaultStrategy: "hover",

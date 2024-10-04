@@ -1,4 +1,9 @@
-import { type MdxProcessorOptions, typographyConfig, withFootnotes } from "@acdh-oeaw/mdx-lib";
+import {
+	type MdxProcessorOptions,
+	typographyConfig,
+	withCustomHeadingIds,
+	withFootnotes,
+} from "@acdh-oeaw/mdx-lib";
 import withSyntaxHighlighter from "@shikijs/rehype";
 import type { ElementContent } from "hast";
 import withHeadingIds from "rehype-slug";
@@ -52,7 +57,11 @@ export async function createMdxConfig(locale: Locale): Promise<MdxProcessorOptio
 			footnoteLabelProperties: { className: ["sr-only"] },
 			footnoteLabelTagName: "h2",
 		},
-		rehypePlugins: [withHeadingIds, [withSyntaxHighlighter, syntaxHighlighterConfig]],
+		rehypePlugins: [
+			withCustomHeadingIds,
+			withHeadingIds,
+			[withSyntaxHighlighter, syntaxHighlighterConfig],
+		],
 	};
 
 	return Promise.resolve(config);

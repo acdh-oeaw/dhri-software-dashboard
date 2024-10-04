@@ -2,10 +2,12 @@
 import { Image } from "astro:assets";
 
 import Link from "@/components/link.astro";
+import { defaultLocale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
 import logoLight from "~/public/assets/images/acdh-ch-logo-light.svg";
 
-const { t } = await createI18n();
+const locale = defaultLocale;
+const { t } = await createI18n(locale);
 ---
 
 <header class="border-b border-neutral-200">

@@ -1,4 +1,6 @@
 ---
+import { createI18n } from "@/lib/i18n";
+
 interface Props {
 	demo: string | null;
 	repo: string;
@@ -8,6 +10,8 @@ interface Props {
 }
 
 const { demo, repo, summary, title, url } = Astro.props;
+
+const { t } = await createI18n();
 ---
 
 <article
@@ -28,7 +32,7 @@ const { demo, repo, summary, title, url } = Astro.props;
 					class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 					href={url}
 				>
-					Website
+					{t("collections.software.url")}
 				</a>
 			) : null
 		}
@@ -36,7 +40,7 @@ const { demo, repo, summary, title, url } = Astro.props;
 			class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 			href={repo}
 		>
-			Git repository
+			{t("collections.software.repo")}
 		</a>
 		{
 			demo ? (
@@ -44,11 +48,9 @@ const { demo, repo, summary, title, url } = Astro.props;
 					class="rounded-md border-2 bg-neutral-50 px-3 py-1 text-xs transition hover:bg-black hover:text-white sm:text-sm"
 					href={demo}
 				>
-					Demo
+					{t("collections.software.demo")}
 				</a>
-			) : (
-				<span class="text-xs italic text-neutral-500 sm:text-sm">Demo not available</span>
-			)
+			) : null
 		}
 	</footer>
 </article>

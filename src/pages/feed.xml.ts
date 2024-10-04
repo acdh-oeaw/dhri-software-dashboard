@@ -1,4 +1,3 @@
-import { createUrl } from "@acdh-oeaw/lib";
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 
@@ -20,17 +19,14 @@ export async function GET(context: APIContext) {
 		description: metadata.description,
 		site: context.site!,
 		/** @see https://docs.astro.build/en/guides/rss/#generating-items */
-		items: software.map((item) => {
+		items: software.map((software) => {
+			const { title, publicationDate, summary } = software.data;
+
 			return {
-				title: item.data.title,
-				description: item.data.summary,
-				pubDate: new Date(item.data.publicationDate),
-				link: String(
-					createUrl({
-						baseUrl: import.meta.env.SITE,
-						pathname: withBasePath(`/${item.id}`),
-					}),
-				),
+				title,
+				description: summary,
+				pubDate: new Date(publicationDate),
+				link: withBasePath(`/${software.id}`),
 			};
 		}),
 		customData: `<language>${locale}</language>`,
