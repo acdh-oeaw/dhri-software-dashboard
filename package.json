@@ -37,7 +37,7 @@
 	"dependencies": {
 		"@acdh-oeaw/keystatic-lib": "^0.4.1",
 		"@acdh-oeaw/lib": "^0.1.12",
-		"@acdh-oeaw/mdx-lib": "^0.1.1",
+		"@acdh-oeaw/mdx-lib": "^0.1.2",
 		"@acdh-oeaw/style-variants": "^0.1.0",
 		"@acdh-oeaw/validate-env": "^0.0.3",
 		"@astrojs/mdx": "^3.1.8",
