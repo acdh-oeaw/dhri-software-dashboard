@@ -37,7 +37,7 @@ export default config({
 			mark() {
 				return <Logo />;
 			},
-			name: "Website",
+			name: "ACDH",
 		},
 		navigation: {
 			HomePage: [withI18nPrefix("index-page", defaultLocale)],
