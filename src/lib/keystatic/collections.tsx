@@ -1,6 +1,6 @@
 /* @jsxImportSource react */
 
-import { createCollection } from "@acdh-oeaw/keystatic-lib";
+import { createCollection, createContentFieldOptions } from "@acdh-oeaw/keystatic-lib";
 import { collection, fields } from "@keystatic/core";
 
 export const createSoftware = createCollection("/software/", (paths) => {
@@ -48,6 +48,8 @@ export const createSoftware = createCollection("/software/", (paths) => {
 			content: fields.mdx({
 				label: "Content",
 				description: "Project description",
+				options: createContentFieldOptions(paths.assetPath),
+				components: {},
 			}),
 		},
 	});
