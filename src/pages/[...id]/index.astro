@@ -11,13 +11,11 @@ export async function getStaticPaths() {
 	const software = await createCollectionResource("software", locale).all();
 
 	return software.map((software) => {
-		return { params: { id: software.id, locale }, props: { software } };
+		return { params: { id: software.id }, props: { locale, software } };
 	});
 }
 
-const { locale } = Astro.params;
-
-const { software } = Astro.props;
+const { locale, software } = Astro.props;
 
 const documentTitle = software.data.title;
 const { content, title } = software.data;
